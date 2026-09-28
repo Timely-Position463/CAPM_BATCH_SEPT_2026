@@ -1,0 +1,215 @@
+
+### Read EmployeeSrv
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv
+### Create Employee
+POST http://localhost:4004/odata/v4/catalog/EmployeeSrv
+Content-Type: application/json
+ 
+{
+    "ID": "2a5776ec-e711-4c11-a92a-2da5b46c40b6",
+    "accountNumber":null,
+    "bankId": null,
+    "email":null,
+    "gender":"M",
+    "language":"E",
+    "loginName":"RAMAM",
+    "nameFirst":" Sita Ram",
+    "nameInitials":null,
+    "nameLast":"Murthy",
+    "nameMiddle":null,
+    "phoneNumber":"(+1) 9898989898",
+    "salaryAmount": "45000.00",
+    "Currency_code" : "EUR"
+}
+
+### Update EmployeeSrv in salary to check .before()
+PUT   http://localhost:4004/odata/v4/catalog/EmployeeSrv/2a5776ec-e711-4c11-a92a-2da5b46c40b2
+Content-Type: application/json
+
+{
+    "salaryAmount": "9705000.00",
+    "Currency_code": "USD"
+}
+
+### Update EmployeeSrv
+POST http://localhost:4004/odata/v4/catalog/updateEmployee
+Content-Type: application/json
+
+{
+    "ID": "2a5776ec-e711-4c11-a92a-2da5b46c40b2",
+    "salaryAmount": "50000.00",
+    "Currency_code": "USD"
+}
+
+### Delete Employee
+POST http://localhost:4004/odata/v4/catalog/deleteEmployee
+Content-Type: application/json
+
+{
+    "ID": "2a5776ec-e711-4c11-a92a-2da5b46c40b2"
+}
+
+
+### Create Address
+POST http://localhost:4004/odata/v4/catalog/createAddress
+Content-Type: application/json
+
+{
+    "NODE_KEY": "5f6870ec-e711-4c11-a92a-1ha2b71c40b7",
+    "ADDRESS_TYPE": "HOME",
+    "VAL_START": "2026-09-21",
+    "VAL_END": "2030-12-31",
+    "LATITUDE": 12.9716,
+    "LONGITUDE": 77.5946
+}
+
+### Update Address
+POST http://localhost:4004/odata/v4/catalog/updateAddress
+Content-Type: application/json
+
+{
+    "NODE_KEY": "A2222222-2222-2222-2222-222222222222",
+    "ADDRESS_TYPE": "PG"
+}
+
+### Returns Products
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv
+
+### Create Products
+POST http://localhost:4004/odata/v4/catalog/createProduct
+Content-Type: application/json
+
+{
+  "NODE_KEY": "111234111-5422-3333-4444-09182734",
+  "PRODUCT_ID": "PRD5001",
+  "TYPE_CODE": "FA",
+  "CATEGORY": "Furniture",
+  "DESCRIPTION": "Office Bench",
+  "TAX_TARIF_CODE": 15,
+  "MEASURE_UNIT": "EA",
+  "WEIGHT_MEASURE": 25.50,
+  "WEIGHT_UNIT": "KG",
+  "PRICE": 7500.00,
+  "CURRENCY_CODE": "INR",
+  "WIDTH": 120.00,
+  "DEPTH": 60.00,
+  "HEIGHT": 75.00,
+  "DIM_UNIT": "CM"
+}   
+
+# Update Product
+POST http://localhost:4004/odata/v4/catalog/update
+
+### Delete Product
+POST http://localhost:4004/odata/v4/catalog/deleteProduct
+Content-Type: application/json
+
+{
+    "NODE_KEY":"111234111-5422-3333-4444-09182734"
+}
+
+### get all product data 
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv
+
+
+### get all product data count
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv/$count
+
+### get all product data count of first 10 values
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv?$top=10
+
+
+### get all product data with specific properties
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv?$filter=CATEGORY eq 'Notebooks'& $filter=WEIGHT_MEASURE eq '4.50'
+
+### get specific details of the  product data
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv?$select=PRODUCT_ID,DESCRIPTION,CATEGORY,PRICE
+
+### get sorted data 
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv?$orderby=PRICE asc&$top=10
+
+
+### to get data of a single product using its key
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv('74867AD200E41EDBA5D8B06B26EB6052')/PRODUCT_ID
+
+###
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv('74867AD200E41EDBA5D8B06B26EB6052')/PRODUCT_ID/$value
+
+### expand items
+GET http://localhost:4004/odata/v4/catalog/PurchaseOrderSrv?$expand=Items
+
+###
+https://services.odata.org/V4/Northwind/Northwind.svc/Employees?$select=FirstName,LastName,Address,City,Region&$filter=Country eq 'USA'
+
+
+### UPDATING product data using .before()
+PUT http://localhost:4004/odata/v4/catalog/ProductsSrv/74867AD200E41EDBA5D8B06B26EB6052
+Content-Type: application/json
+
+{
+    "PRICE":"12000"
+}
+
+###
+PUT http://localhost:4004/odata/v4/catalog/AdressSrv('74867AD200E41EDBA5D8B06885664052')
+Content-Type: application/json
+ 
+{
+    "COUNTRY": "IN"
+}
+
+###
+GET http://localhost:4004/odata/v4/catalog/getHighestSalariedEmployees()
+
+###
+GET http://localhost:4004/odata/v4/catalog/getHighestPricedProducts()
+
+
+### Trying @readonly with db insertion and it should result in 405 method not allowed
+POST http://localhost:4004/odata/v4/catalog/EmployeeSrv
+Content-Type: application/json
+ 
+{
+    "ID": "2a5776ec-e711-4c11-a92a-2da5b46c40b60",
+    "accountNumber":null,
+    "bankId": null,
+    "email":null,
+    "gender":"M",
+    "language":"E",
+    "loginName":"RAMAM",
+    "nameFirst":" Sita Ram",
+    "nameInitials":null,
+    "nameLast":"Murthy",
+    "nameMiddle":null,
+    "phoneNumber":"(+1) 9898989898",
+    "salaryAmount": "45000.00",
+    "Currency_code" : "EUR"
+}
+
+###
+GET http://localhost:4004/odata/v4/catalog/PurchaseOrderSrv
+
+###
+POST  http://localhost:4004/odata/v4/catalog/PurchaseOrderSrv/74867AD200E41EDBA5D8B0C98DC28052/discountPrice
+###
+GET  http://localhost:4004/odata/v4/catalog/PurchaseOrderSrv/74867AD200E41EDBA5D8B0C98DC28052/largestOrder()
+
+###
+POST http://localhost:4004/odata/v4/catalog/ProductsSrv/74867AD200E41EDBA5D8B06B26EB4052/increasePrice
+Content-Type: application/json 
+
+{}
+
+
+###
+POST http://localhost:4004/odata/v4/catalog/EmployeeSrv('02BD2137-0890-1EEA-A6C2-BB55C19787FB')/increaseSalary
+Content-Type: application/json
+
+{}
+
+###
+GET http://localhost:4004/odata/v4/catalog/EmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C19787FB/Top20HighestPaidEmployees()
+
+
+###
+GET http://localhost:4004/odata/v4/catalog/getUtilities()
