@@ -260,6 +260,7 @@ module.exports=cds.service.impl(async function(){
         }
     })
 
+    // to get top products from ProductsSrv table
     this.on('getTopProducts',async(req,res)=>{
         try {
             const transaction=cds.tx(req);
@@ -273,6 +274,7 @@ module.exports=cds.service.impl(async function(){
         }
     })
     
+    //To update Salary of an Employee upto 15%
     this.on('increaseSalary',async(req,res)=>{
         const ID = req.params[0].ID;
         try {
@@ -290,7 +292,7 @@ module.exports=cds.service.impl(async function(){
         }
     })
     
-
+    // To get 20 Employees with Highest Salary
     this.on('Top20HighestPaidEmployees',async(req,res)=>{
         try {
             const tran=cds.tx(req);

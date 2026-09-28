@@ -1,6 +1,9 @@
 
 ### Read EmployeeSrv
 GET http://localhost:4004/odata/v4/catalog/EmployeeSrv
+
+###
+GET http://localhost:4004/odata/v4/catalog/ProductsSrv
 ### Create Employee
 POST http://localhost:4004/odata/v4/catalog/EmployeeSrv
 Content-Type: application/json
